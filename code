@@ -1,0 +1,40 @@
+n = input()
+
+#Calcule la longueur de n pour la boucle for (et avoir les indexes)
+lenght_n = len(n)
+
+#Empty A and C at the beginning to wich will be added the values we will find with the "for" loop
+C=''
+A=''
+
+#Determine if we keep the first character of n 
+if n[0]=='C' or n[0] == 'F' or n[0]=='G':
+    C = C + n[0]
+elif n[0] == 'A' or n[0] == 'D' or n[0] == 'E':
+    A = A + n[0]
+
+#"for" loop to check what is the value of the character right after the "|", that I use here as my point of reference
+# If the character in '| +1' matches a tonality I'm looking for, I add it at A or C
+
+for i in range (lenght_n):
+    if ((n[i]=='|' and n[i+1] == 'A') or (n[i]=='|' and n[i+1] == 'D')or 
+        (n[i]=='|' and n[i+1] == 'E')):
+        A= A+n[i+1]
+    elif ((n[i]=='|' and n[i+1] == 'C') or (n[i]=='|' and n[i+1] == 'F')or 
+        (n[i]=='|' and n[i+1] == 'G')):
+        C = C+n[i+1]
+
+#Calcul which from A or C has the most of tonality added to define the principal chord of the song
+
+if len(C) > len(A):
+    print('C-dur')
+elif len(C)< len(A):
+    print('A-mol')
+    
+# If len(A)==len(C), we choose the chord by looking at the last tonality of n
+
+elif len(C) == len(A):
+    if n[-1]== 'C':
+        print('C-dur')
+    elif n[-1] == 'A':
+        print('A-mol')
